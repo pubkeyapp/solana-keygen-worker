@@ -1,0 +1,30 @@
+{
+  "name": "generate-vanity-keypair",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/generate-vanity-keypair/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/generate-vanity-keypair",
+        "main": "packages/generate-vanity-keypair/src/index.ts",
+        "tsConfig": "packages/generate-vanity-keypair/tsconfig.lib.json",
+        "assets": ["packages/generate-vanity-keypair/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../coverage/packages/generate-vanity-keypair"
+      }
+    }
+  },
+  "tags": []
+}
