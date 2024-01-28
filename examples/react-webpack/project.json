@@ -1,0 +1,70 @@
+{
+  "name": "react-webpack",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "examples/react-webpack/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/examples/react-webpack",
+        "index": "examples/react-webpack/src/index.html",
+        "baseHref": "/",
+        "main": "examples/react-webpack/src/main.tsx",
+        "tsConfig": "examples/react-webpack/tsconfig.app.json",
+        "assets": ["examples/react-webpack/src/favicon.ico", "examples/react-webpack/src/assets"],
+        "styles": ["examples/react-webpack/src/styles.css"],
+        "scripts": [],
+        "postcssConfig": "examples/react-webpack/postcss.config.cjs",
+        "webpackConfig": "examples/react-webpack/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "examples/react-webpack/src/environments/environment.ts",
+              "with": "examples/react-webpack/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "react-webpack:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "react-webpack:build:development"
+        },
+        "production": {
+          "buildTarget": "react-webpack:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

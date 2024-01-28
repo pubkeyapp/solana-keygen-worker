@@ -1,1 +1,1 @@
-export * from './lib/generate-vanity-keypair';
+export * from './lib/generate-vanity-keypair'
