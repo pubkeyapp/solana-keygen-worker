@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@solana-keygen-worker/generate-vanity-keypair": ["packages/generate-vanity-keypair/src/index.ts"]
+      "@solana-keygen-worker/generate-vanity-keypair": ["packages/generate-vanity-keypair/src/index.ts"],
+      "@solana-keygen-worker/ui": ["packages/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -10,6 +10,14 @@ This project is a demo of generating a vanity keypair using a web worker.
 
 ## Project Structure
 
+### App: react-vite
+
+A demo of using a web worker with React and Vite.
+
+This is where the worker is created and used in the UI.
+
+This project uses a plain TypeScript worker, but you can use any method you want.
+
 ### App: react-webpack
 
 A demo of using a web worker with React and Webpack.
@@ -23,6 +31,10 @@ This project uses [web-worker-bus](https://github.com/anchmelev/web-worker-bus) 
 This is the package that does the actual work of generating the keypair.
 
 Currently, it's using the `Keypair` class from `@solana/web3.js` to generate the keypair. There might be a faster way to generate the keypair.
+
+### Package: ui
+
+This is a shared package that contains the UI components used by the React apps.
 
 ## Setup
 

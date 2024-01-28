@@ -1,10 +1,9 @@
 import { UiNotFound, UiThemeProvider } from '@pubkey-ui/core'
 import { AppLayout, GrindKeypairFeature } from '@solana-keygen-worker/ui'
-import { Navigate, useRoutes } from 'react-router-dom'
 
 import '@pubkey-ui/core/index.esm.css'
-
-import { grindKeypairService } from './workers/grind-keypair-service'
+import { Navigate, useRoutes } from 'react-router-dom'
+import { grindKeypair } from './grind-geypair'
 
 export function App() {
   return (
@@ -12,7 +11,7 @@ export function App() {
       <AppLayout links={[{ label: 'Grind Keypair', link: '/grind-keypair' }]}>
         {useRoutes([
           { path: '/', element: <Navigate replace to="/grind-keypair" /> },
-          { path: '/grind-keypair', element: <GrindKeypairFeature grind={grindKeypairService.grindKeypair} /> },
+          { path: '/grind-keypair', element: <GrindKeypairFeature grind={grindKeypair} /> },
           { path: '*', element: <UiNotFound /> },
         ])}
       </AppLayout>

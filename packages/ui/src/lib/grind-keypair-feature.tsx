@@ -1,13 +1,15 @@
-import { Code, Group, Text } from '@mantine/core'
+import { Code, Text } from '@mantine/core'
 import { toastSuccess, UiCard, UiInfo, UiStack } from '@pubkey-ui/core'
 import { VanityKeypairResult } from '@solana-keygen-worker/generate-vanity-keypair'
-
 import { useEffect, useState } from 'react'
-import { grindKeypairService } from '../workers/grind-keypair-service'
 import { KeypairTable } from './keypair-table'
 import { SearchForm } from './search-form'
 
-export function GrindKeypair() {
+export function GrindKeypairFeature({
+  grind,
+}: {
+  grind: ({ startsWith }: { startsWith: string }) => Promise<VanityKeypairResult>
+}) {
   const [loading, setLoading] = useState(false)
   const [results, setResult] = useState<VanityKeypairResult[]>([])
   const [startsWith, setStartsWith] = useState('')
@@ -18,8 +20,7 @@ export function GrindKeypair() {
       return
     }
     setLoading(true)
-    grindKeypairService
-      .grindKeypair({ startsWith })
+    grind({ startsWith })
       .then((result) => {
         setResult([result, ...results])
         toastSuccess({
@@ -52,19 +53,18 @@ export function GrindKeypair() {
       />
       <UiCard title="Grind keypair">
         <UiStack gap="xl" my="lg">
-          <Group gap="xs">
-            <SearchForm
-              startsWith={startsWith}
-              submit={(value) => {
-                if (value === startsWith && results.length) {
-                  setTrigger((prev) => !prev)
-                } else {
-                  setStartsWith(value)
-                }
-              }}
-              loading={loading}
-            />
-          </Group>
+          <SearchForm
+            startsWith={startsWith}
+            submit={(value) => {
+              if (value === startsWith && results.length) {
+                setTrigger((prev) => !prev)
+              } else {
+                setStartsWith(value)
+              }
+            }}
+            loading={loading}
+          />
+
           {results.length ? <KeypairTable results={results} /> : null}
         </UiStack>
       </UiCard>
