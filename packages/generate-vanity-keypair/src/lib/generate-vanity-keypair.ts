@@ -36,17 +36,15 @@ export function generateVanityKeypair({
     }
   } while (!regex.test(keypair.publicKey.toBase58()))
 
-  const end = Date.now()
+  const duration = Date.now() - start
   if (verbose) {
     console.log(
-      `Found keypair with public key ${keypair.publicKey} after ${iterations} iterations in ${
-        end - start
-      }ms. Searching for ${regex}`,
+      `Found keypair with public key ${keypair.publicKey} after ${iterations} iterations in ${duration}ms. Searching for ${regex}`,
     )
   }
 
   return {
-    duration: end - start,
+    duration,
     iterations,
     publicKey: keypair.publicKey.toBase58(),
     regex,
